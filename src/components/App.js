@@ -12,6 +12,14 @@ function App() {
  /**
   * code here
   */
+ const [state,setState] = useState('')
+ function handleChange(event){
+  setState(email: event.target.value)
+ }
+ function isValidEmailAddress(address) {
+//     return !! address.match(/.+@.+/);
+  return "Email is invalid"
+}
 
   return(
     <div className="App">
@@ -23,7 +31,11 @@ function App() {
             <input id='fname' name="name"  ref={fnameRef}/>
             <br></br>
             <p>Email</p>
-            <input id='lname' name="name"   ref={emailRef}/>
+            <input id='lname' name="name"   ref={emailRef} value={email} onChange={(event) => handleChange(event)}
+             onBlur={() => setState({
+                 emailIsValid: isValidEmailAddress(email)
+             })
+            />
             {error && <h2 style={{color: 'red'}}>{error}</h2>}
           </label>
         </fieldset>
